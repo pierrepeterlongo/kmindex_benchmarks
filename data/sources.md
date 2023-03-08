@@ -1,4 +1,5 @@
 # Tara ocean stations, raw reads location
+## 50 stations used for benchmarking kmindex and metagraph
 
 - 11SUR1QQSS11 http://www.ebi.ac.uk/ena/data/view/ERS488262
 - 142SUR1QQSS11 http://www.ebi.ac.uk/ena/data/view/ERS493971
@@ -56,3 +57,7 @@
 - 196SUR1QQSS11
 - 201SUR1QQSS11
 - 205SUR1QQSS11
+
+## All stations indexed in XXX (OGA link here)
+* Raw data may be found from EBI web site: https://www.ebi.ac.uk/ena/browser/view/PRJEB402
+* Identifiers, as prepared byEric Pelletier, CEA, Genoscope : [bact_metag_tara.txt](bact_metag_tara.txt)
