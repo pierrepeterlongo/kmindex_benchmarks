@@ -30,20 +30,20 @@ cat fof.txt | metagraph build -p 32 -k 23 --min-count 2 -o index_tara_set_3_QQSS
 ```bash
 metagraph transform -v --to-fasta --primary-kmers -o primary_contigs -p 32 index_tara_set_3_QQSS.dbg 
 ```
-* Wall clock time: 
-* Max RAM:
-* Max Disk: 
-* Size created file (`primary_contigs.fasta.gz`): 
+* Wall clock time: 22h56
+* Max RAM:727GB
+* Max Disk: 215GB
+* Size created file (`primary_contigs.fasta.gz`): 210GB
 
 **Construct a new graph from the primary contigs and mark this graph as primary**
 
 ```bash
 metagraph build -v -p 32 -k 23 -o graph_primary --mode primary primary_contigs.fasta.gz
 ```
-* Wall clock time: 
-* Max RAM:
-* Max Disk: 
-* Size created file (`graph_primary.dbg`): 
+* Wall clock time: NA
+* Max RAM: >900GB
+* Max Disk: NA
+* Size created file (`graph_primary.dbg`): NA
 
 
 **Annotate the graph**
