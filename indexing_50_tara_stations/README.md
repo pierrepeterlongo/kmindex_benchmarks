@@ -41,7 +41,7 @@ metagraph transform -v --to-fasta --primary-kmers -o primary_contigs -p 32 index
 metagraph build -v -p 32 -k 23 -o graph_primary --mode primary primary_contigs.fasta.gz
 ```
 * Wall clock time: NA
-* Max RAM: >900GB
+* Max RAM: >900GB - job killed.
 * Max Disk: NA
 * Size created file (`graph_primary.dbg`): NA
 
