@@ -46,15 +46,15 @@
 - 208SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA6864583
 - 209SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA6864584
 - 210SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA6864585
-- 168SUR1QQSS11 
-- 173SUR1QQSS11
-- 175SUR1QQSS11
-- 180SUR1QQSS11
-- 188SUR1QQSS11
-- 189SUR1QQSS11
-- 191SUR1QQSS11
-- 193SUR1QQSS11
-- 194SUR2QQSS11
-- 196SUR1QQSS11
-- 201SUR1QQSS11
-- 205SUR1QQSS11
+- 168SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA4397145
+- 173SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA4397265
+- 175SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA4397348
+- 180SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA4397507
+- 188SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA4397604
+- 189SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA4397691
+- 191SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA4397788
+- 193SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA4397835
+- 194SUR2QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA4397878
+- 196SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA4397965
+- 201SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA4398043
+- 205SUR1QQSS11 https://www.ebi.ac.uk/ena/browser/view/SAMEA4398144
