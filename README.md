@@ -2,7 +2,7 @@
 This directory synthetises command lines and data sources of the experiments proposed in the manuscript 
 "XXX Titre".
 
-The experiments were conducted with [kmtricks v0.2.0](https://github.com/tlemane/kmindex/releases/tag/v0.2.0) and [MetaGraph v0.3.6](https://github.com/ratschlab/metagraph/releases/tag/v0.3.6).
+The experiments were conducted with [kmindex v0.2.0](https://github.com/tlemane/kmindex/releases/tag/v0.2.0) and [MetaGraph v0.3.6](https://github.com/ratschlab/metagraph/releases/tag/v0.3.6).
 
 
 
