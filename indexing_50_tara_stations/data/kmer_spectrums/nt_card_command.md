@@ -27,3 +27,8 @@ echo -n $file" " && tail -n 999 ${file} | cut -f 3 | paste -sd+ - | bc
 done
 ```
 
+* Considering the whole dataset at once: 
+
+```bash
+ntcard -t 32 -k 25 -p all *.fastq.gz
+```
