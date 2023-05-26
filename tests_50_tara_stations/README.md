@@ -1,4 +1,25 @@
+<!-- vscode-markdown-toc -->
+* 1. [kmindex indexing](#kmindexindexing)
+* 2. [kmindex querying](#kmindexquerying)
+* 3. [MetaGraph indexing](#MetaGraphindexing)
+* 4. [PAC Indexing](#PACIndexing)
+* 5. [PAC query](#PACquery)
+* 6. [MetaProfi Indexing](#MetaProfiIndexing)
+	* 6.1. [kmer counting and filtering](#kmercountingandfiltering)
+	* 6.2. [Build MetaProfi index](#BuildMetaProfiindex)
+	* 6.3. [MetaProfi query](#MetaProfiquery)
+* 7. [GGCAT commands (These results are not included in the kmindex manuscript)](#GGCATcommandsTheseresultsarenotincludedinthekmindexmanuscript)
+	* 7.1. [GGCAT Indexing](#GGCATIndexing)
+	* 7.2. [GGCAT QUERY](#GGCATQUERY)
+* 8. [Needle commands (These results are not included in the kmindex manuscript)](#NeedlecommandsTheseresultsarenotincludedinthekmindexmanuscript)
+	* 8.1. [Needle indexing](#Needleindexing)
+	* 8.2. [Needle query](#Needlequery)
 
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
 
 # Data
 See the [data](data) directory. 
@@ -25,7 +46,7 @@ sleep 30
 ```
 
 # kmindex commands 
-## kmindex indexing
+##  1. <a name='kmindexindexing'></a>kmindex indexing
 See `data/fof.txt` file
 
 ```bash
@@ -37,7 +58,7 @@ B=25000000000
 kmindex build -i index_50_tara -f fof.txt -d ./rundir -r index_all_50 -k ${K} --cpr --bloom-size ${B}  --threads ${T} --nb-partitions ${P}
 ```
 
-## kmindex querying
+##  2. <a name='kmindexquerying'></a>kmindex querying
 ```bash
 Z=3
 T=32
@@ -47,7 +68,7 @@ kmindex  query -i index_50_tara -z ${Z} --threads ${T} -o res -q query.fasta
 # MetaGraph commands
 MetaGraph was used as indicated in this document
 https://metagraph.ethz.ch/static/docs/quick_start.html, sections "[Construct canonical graph](https://metagraph.ethz.ch/static/docs/quick_start.html#construct-canonical-graph)" and "[Construct primary graph](https://metagraph.ethz.ch/static/docs/quick_start.html#construct-primary-graph)".
-## MetaGraph indexing
+##  3. <a name='MetaGraphindexing'></a>MetaGraph indexing
 **Generate the file of file**
 
 ```bash 
@@ -110,7 +131,7 @@ Following discussions with the PAC authors, we tested two versions, the one indi
 
 Here are commands and results obtained with this latest version: 
 
-## PAC Indexing
+##  4. <a name='PACIndexing'></a>PAC Indexing
 **Generate the file of file**
 
 ```bash 
@@ -122,7 +143,7 @@ ls /path/to/read/files/*.fastq.gz > fof.txt
 bin/PAC/build/pac -f fof.txt -d Tara_PAC -k 28 -b 30000000000 -e 8 -u -c 32  
 ```
 
-## PAC query
+##  5. <a name='PACquery'></a>PAC query
 ```bash
 pac -l Tara_PAC -q query.fa -c 32
 ```
@@ -136,10 +157,10 @@ pac -l Tara_PAC -q query.fa -c 32
 	* MetaProFi version: v0.6.0
 	* K-Mer Counter (KMC) ver. 3.2.2
 
-## MetaProfi Indexing
+##  6. <a name='MetaProfiIndexing'></a>MetaProfi Indexing
 We need filtered kmers, so we count kmers using kmc.
 
-### kmer counting and filtering
+###  6.1. <a name='kmercountingandfiltering'></a>kmer counting and filtering
 ```bash
 for fq_ile_name in `ls data_per_station/`; do 
 	echo ${fq_ile_name}; 
@@ -158,7 +179,7 @@ for fq_ile_name in `ls data_per_station/`; do
 done
 ```
 
-### Build MetaProfi index
+###  6.2. <a name='BuildMetaProfiindex'></a>Build MetaProfi index
 Create fof
 ```bash
 for id in `ls counted_kmers/*.fasta`; do canid=`echo $id | cut -d "/" -f 2 | cut -d '_' -f 1`; echo $canid: $id; done > fof.txt
@@ -187,43 +208,43 @@ time disk_mem_count.sh  metaprofi build /WORKS/expe_MetaProfi/fof.txt /WORKS/exp
 
 
 
-### MetaProfi query
+###  6.3. <a name='MetaProfiquery'></a>MetaProfi query
 ```bash
 metaprofi search_index   /WORKS/expe_MetaProfi/config_tara.yaml  -f query.fa -t 10 -i nucleotide
 ```
 
 
-## GGCAT commands (These results are not included in the kmindex manuscript)
+##  7. <a name='GGCATcommandsTheseresultsarenotincludedinthekmindexmanuscript'></a>GGCAT commands (These results are not included in the kmindex manuscript)
 * Tool versions: ggcat_cmdline 0.1.0
 
-### GGCAT Indexing
+###  7.1. <a name='GGCATIndexing'></a>GGCAT Indexing
 ```bash
 ulimit -Hn
 500000
 ggcat build -c -k 28 --min-multiplicity 2 -j 32 -m 800  -l fof.txt
 ```
 
-### GGCAT QUERY
+###  7.2. <a name='GGCATQUERY'></a>GGCAT QUERY
 ```bash
 ggcat query --colors -k 28 -j 32 --memory 800 --output-file-prefix res output.fasta.lz4 query.fasta 
 ```
 (Killed after 12h computatio time, with query.fa containing a single read)
 
 
-## Needle commands (These results are not included in the kmindex manuscript)
+##  8. <a name='NeedlecommandsTheseresultsarenotincludedinthekmindexmanuscript'></a>Needle commands (These results are not included in the kmindex manuscript)
 * Tool versions:
     Last update: 
     needle-ibf version: 
     SeqAn version: 3.2.0
 
-### Needle indexing
+###  8.1. <a name='Needleindexing'></a>Needle indexing
 ```bash
 ls -dD data_per_station/* > fof.lst
 ./needle minimiser fof.lst -k 25 -t 32 --cutoff 2  
 ./needle ibfmin *.minimiser -t 32 -f 0.25 -e 2 -e 255 -o needle_index
 ```
 
-### Needle query
+###  8.2. <a name='Needlequery'></a>Needle query
 ```bash
 ./needle estimate query.fasta -i needle_index
 ```
