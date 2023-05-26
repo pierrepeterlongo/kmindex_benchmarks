@@ -1,13 +1,19 @@
 <!-- vscode-markdown-toc -->
-* 1. [kmindex indexing](#kmindexindexing)
-* 2. [kmindex querying](#kmindexquerying)
-* 3. [MetaGraph indexing](#MetaGraphindexing)
-* 4. [PAC Indexing](#PACIndexing)
-* 5. [PAC query](#PACquery)
-* 6. [MetaProfi Indexing](#MetaProfiIndexing)
-	* 6.1. [kmer counting and filtering](#kmercountingandfiltering)
-	* 6.2. [Build MetaProfi index](#BuildMetaProfiindex)
-	* 6.3. [MetaProfi query](#MetaProfiquery)
+* 1. [Data](#Data)
+* 2. [COLD and WARM queries](#COLDandWARMqueries)
+* 3. [kmindex commands](#kmindexcommands)
+	* 3.1. [kmindex indexing](#kmindexindexing)
+	* 3.2. [kmindex querying](#kmindexquerying)
+* 4. [MetaGraph commands](#MetaGraphcommands)
+	* 4.1. [MetaGraph indexing](#MetaGraphindexing)
+* 5. [PAC commands](#PACcommands)
+	* 5.1. [PAC Indexing](#PACIndexing)
+	* 5.2. [PAC query](#PACquery)
+* 6. [MetaProfi](#MetaProfi)
+	* 6.1. [MetaProfi Indexing](#MetaProfiIndexing)
+		* 6.1.1. [kmer counting and filtering](#kmercountingandfiltering)
+		* 6.1.2. [Build MetaProfi index](#BuildMetaProfiindex)
+		* 6.1.3. [MetaProfi query](#MetaProfiquery)
 * 7. [GGCAT commands (These results are not included in the kmindex manuscript)](#GGCATcommandsTheseresultsarenotincludedinthekmindexmanuscript)
 	* 7.1. [GGCAT Indexing](#GGCATIndexing)
 	* 7.2. [GGCAT QUERY](#GGCATQUERY)
@@ -21,7 +27,7 @@
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
 
-# Data
+##  1. <a name='Data'></a>Data
 See the [data](data) directory. 
 
 Moreover except metagraph and kmindex, tested tool do not support file of files. Thus they cannot consider two distinct files as the same data sample. Hence for these tools we had to explicitely concatenate files:
@@ -36,7 +42,7 @@ do
 done	
 ```
 
-# COLD and WARM queries
+##  2. <a name='COLDandWARMqueries'></a>COLD and WARM queries
 WARM queries are computed twice each query.
 COLD queries are computed after this command, that empty the cache: 
 
@@ -45,8 +51,8 @@ sudo systemctl start drop_cache.service
 sleep 30
 ```
 
-# kmindex commands 
-##  1. <a name='kmindexindexing'></a>kmindex indexing
+##  3. <a name='kmindexcommands'></a>kmindex commands 
+###  3.1. <a name='kmindexindexing'></a>kmindex indexing
 See `data/fof.txt` file
 
 ```bash
@@ -58,17 +64,17 @@ B=25000000000
 kmindex build -i index_50_tara -f fof.txt -d ./rundir -r index_all_50 -k ${K} --cpr --bloom-size ${B}  --threads ${T} --nb-partitions ${P}
 ```
 
-##  2. <a name='kmindexquerying'></a>kmindex querying
+###  3.2. <a name='kmindexquerying'></a>kmindex querying
 ```bash
 Z=3
 T=32
 kmindex  query -i index_50_tara -z ${Z} --threads ${T} -o res -q query.fasta
 ```
 
-# MetaGraph commands
+##  4. <a name='MetaGraphcommands'></a>MetaGraph commands
 MetaGraph was used as indicated in this document
 https://metagraph.ethz.ch/static/docs/quick_start.html, sections "[Construct canonical graph](https://metagraph.ethz.ch/static/docs/quick_start.html#construct-canonical-graph)" and "[Construct primary graph](https://metagraph.ethz.ch/static/docs/quick_start.html#construct-primary-graph)".
-##  3. <a name='MetaGraphindexing'></a>MetaGraph indexing
+###  4.1. <a name='MetaGraphindexing'></a>MetaGraph indexing
 **Generate the file of file**
 
 ```bash 
@@ -126,12 +132,12 @@ while read line; do
 done < fof_annotated.txt
 ```
 
-# PAC commands
+##  5. <a name='PACcommands'></a>PAC commands
 Following discussions with the PAC authors, we tested two versions, the one indicated in the original paper, and the version 20b8094f5074e93e792fbf26a5572119c058c23b. 
 
 Here are commands and results obtained with this latest version: 
 
-##  4. <a name='PACIndexing'></a>PAC Indexing
+###  5.1. <a name='PACIndexing'></a>PAC Indexing
 **Generate the file of file**
 
 ```bash 
@@ -143,7 +149,7 @@ ls /path/to/read/files/*.fastq.gz > fof.txt
 bin/PAC/build/pac -f fof.txt -d Tara_PAC -k 28 -b 30000000000 -e 8 -u -c 32  
 ```
 
-##  5. <a name='PACquery'></a>PAC query
+###  5.2. <a name='PACquery'></a>PAC query
 ```bash
 pac -l Tara_PAC -q query.fa -c 32
 ```
@@ -151,16 +157,16 @@ pac -l Tara_PAC -q query.fa -c 32
 (the output file being empty)
 
 
-# MetaProfi
+##  6. <a name='MetaProfi'></a>MetaProfi
 * Tool versions: 
 	* python 3.9.5
 	* MetaProFi version: v0.6.0
 	* K-Mer Counter (KMC) ver. 3.2.2
 
-##  6. <a name='MetaProfiIndexing'></a>MetaProfi Indexing
+###  6.1. <a name='MetaProfiIndexing'></a>MetaProfi Indexing
 We need filtered kmers, so we count kmers using kmc.
 
-###  6.1. <a name='kmercountingandfiltering'></a>kmer counting and filtering
+####  6.1.1. <a name='kmercountingandfiltering'></a>kmer counting and filtering
 ```bash
 for fq_ile_name in `ls data_per_station/`; do 
 	echo ${fq_ile_name}; 
@@ -179,7 +185,7 @@ for fq_ile_name in `ls data_per_station/`; do
 done
 ```
 
-###  6.2. <a name='BuildMetaProfiindex'></a>Build MetaProfi index
+####  6.1.2. <a name='BuildMetaProfiindex'></a>Build MetaProfi index
 Create fof
 ```bash
 for id in `ls counted_kmers/*.fasta`; do canid=`echo $id | cut -d "/" -f 2 | cut -d '_' -f 1`; echo $canid: $id; done > fof.txt
@@ -208,7 +214,7 @@ time disk_mem_count.sh  metaprofi build /WORKS/expe_MetaProfi/fof.txt /WORKS/exp
 
 
 
-###  6.3. <a name='MetaProfiquery'></a>MetaProfi query
+####  6.1.3. <a name='MetaProfiquery'></a>MetaProfi query
 ```bash
 metaprofi search_index   /WORKS/expe_MetaProfi/config_tara.yaml  -f query.fa -t 10 -i nucleotide
 ```
