@@ -1,8 +1,10 @@
 # kmindex_benchmarks
 This directory synthetises command lines and data sources of the experiments proposed in the manuscript 
-"kmindex and ora: indexing and real-time user-friendly queries in terabytes-sized complex genomic datasets Titre".
+"kmindex and ora: indexing and real-time user-friendly queries in terabytes-sized complex genomic datasets".
 
-The experiments were conducted with [kmindex v0.2.0](https://github.com/tlemane/kmindex/releases/tag/v0.2.0) and [MetaGraph v0.3.6](https://github.com/ratschlab/metagraph/releases/tag/v0.3.6).
+
+Check the tests_50_tara_stations repository to access a description of the used data samples, all tools tested with their verion numbers and an exhaustive description of the used commands.
+
 
 
 
