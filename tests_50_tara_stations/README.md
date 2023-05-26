@@ -1,10 +1,26 @@
 # Data
 See the [data](data) directory. 
 
+
 # kmindex commands 
 ## Indexing
+See `data/fof.txt` file
+
+```bash
+K=23
+M=2
+T=32
+P=128
+B=25000000000
+kmindex build -i index_50_tara -f fof.txt -d ./rundir -r index_all_50 -k ${K} --cpr --bloom-size ${B}  --threads ${T} --nb-partitions ${P}
+```
 
 ## Querying
+```bash
+Z=3
+T=32
+kmindex  query -i index_50_tara -z ${Z} --threads ${T} -o res -q query.fasta
+```
 
 # MetaGraph commands
 MetaGraph was used as indicated in this document
@@ -13,7 +29,7 @@ https://metagraph.ethz.ch/static/docs/quick_start.html, sections "[Construct can
 **Generate the file of file**
 
 ```bash 
-ls /path/to/read/files/*.fastq.gz > fof.txt
+ls /path/to/read/files/*.fastq.gz > fof.txt 
 ```
 
 **Create a canonical graph**
@@ -48,7 +64,7 @@ metagraph build -v -p 32 -k 23 -o graph_primary --mode primary primary_contigs.f
 
 **Annotate the graph**
 
-Annotation of the graph was done following instructions here: https://github.com/ratschlab/metagraph/issues/412#issuecomment-1181710500
+Annotation of the graph was not done, as the previous step did not finished. The Annotations would have been done following instructions here: https://github.com/ratschlab/metagraph/issues/412#issuecomment-1181710500, and would have been the following
 
 * Prepare the labeled file of file: 
 
@@ -59,7 +75,6 @@ python create_fof_from_file_names.py -i fof.txt > fof_annotated.txt
 `create_fof_from_file_names.py` can be found in the [script](script) directory.
 
 * Annotate the graph:
-XXX VALIDER:
 ```bash
 while read line; do 
 	name=`echo $line | cut -d " " -f 1`; 
@@ -73,10 +88,4 @@ done < fof_annotated.txt
 * Size created file (`XXX`): 
 
 
-## Querying
 
-### Querying one read: 
-
-```bash
-TODO
-```
