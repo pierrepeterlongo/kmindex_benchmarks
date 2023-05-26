@@ -1,3 +1,7 @@
+This readme file sums up the tested tool versions and the commands used.
+
+A special file kmtricks_dynamicity.md is dedicated to the tests performed comparing the various ways to dynamically update a kmindex index.
+
 <!-- vscode-markdown-toc -->
 * 1. [Data](#Data)
 * 2. [COLD and WARM queries](#COLDandWARMqueries)
