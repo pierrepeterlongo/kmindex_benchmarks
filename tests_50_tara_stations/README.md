@@ -1,3 +1,5 @@
+
+
 # Data
 See the [data](data) directory. 
 
@@ -189,3 +191,42 @@ time disk_mem_count.sh  metaprofi build /WORKS/expe_MetaProfi/fof.txt /WORKS/exp
 ```bash
 metaprofi search_index   /WORKS/expe_MetaProfi/config_tara.yaml  -f query.fa -t 10 -i nucleotide
 ```
+
+
+## GGCAT commands (These results are not included in the kmindex manuscript)
+* Tool versions: ggcat_cmdline 0.1.0
+
+### GGCAT Indexing
+```bash
+ulimit -Hn
+500000
+ggcat build -c -k 28 --min-multiplicity 2 -j 32 -m 800  -l fof.txt
+```
+
+### GGCAT QUERY
+```bash
+ggcat query --colors -k 28 -j 32 --memory 800 --output-file-prefix res output.fasta.lz4 query.fasta 
+```
+(Killed after 12h computatio time, with query.fa containing a single read)
+
+
+## Needle commands (These results are not included in the kmindex manuscript)
+* Tool versions:
+    Last update: 
+    needle-ibf version: 
+    SeqAn version: 3.2.0
+
+### Needle indexing
+```bash
+ls -dD data_per_station/* > fof.lst
+./needle minimiser fof.lst -k 25 -t 32 --cutoff 2  
+./needle ibfmin *.minimiser -t 32 -f 0.25 -e 2 -e 255 -o needle_index
+```
+
+### Needle query
+```bash
+./needle estimate query.fasta -i needle_index
+```
+Results are erroneous. This is expected as Needle is based on subsamples of minimizers, and developped for transcripts expressions.
+
+
