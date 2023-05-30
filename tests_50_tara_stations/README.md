@@ -46,14 +46,16 @@ do
 done	
 ```
 
-##  2. <a name='COLDandWARMqueries'></a>COLD and WARM queries
-WARM queries are computed twice each query.
-COLD queries are computed after this command, that empty the cache: 
+##  2. <a name='COLDandWARMqueries'></a>COLD, WARM, and WARM+ queries
 
+COLD queries are computed after this command, that empty the cache: 
 ```bash
-sudo systemctl start drop_cache.service
+sync; echo 3 > /proc/sys/vm/drop_caches 
 sleep 30
 ```
+WARM queries are computed after a first random query of the same size.
+
+WARM+ queries are computed twice each query.  
 
 ##  3. <a name='kmindexcommands'></a>kmindex commands 
 ###  3.1. <a name='kmindexindexing'></a>kmindex indexing
