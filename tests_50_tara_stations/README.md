@@ -314,11 +314,12 @@ We gerated a random sequence composed of 10k nucleotides with an equal probabili
 We queried the $10000-28+1$ 28-mers of this sequence, and counted the number of positive answers. We abusively call this number the number of false positives. Notice that this is an over estimation of the number of false positives, as some of the 28-mers of the random sequence may be present in the reference dataset, with a tiny probability of $1/4^{28}$.
 
 ###  4.2. <a name='FPkmindex'></a>FP kmindex
+**Note**: the `data/test_FP` directory contains the random random sequence and results files of tested tools. 
+
 **Query** 
 ```bash
 kmindex query -i TaraIndex -q random_10k.fa -z 5 -o res_random_10k;
 ```
-See the 
 
 **Analyses**
 ```bash
