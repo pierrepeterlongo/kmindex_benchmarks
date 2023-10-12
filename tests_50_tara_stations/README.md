@@ -1,3 +1,7 @@
+This readme file sums up the tested tool versions and the commands used.
+
+A special file [kmtricks_dynamicity.md](kmtricks_dynamicity.md) is dedicated to the tests performed comparing the various ways to dynamically update a kmindex index.
+
 <!-- vscode-markdown-toc -->
 * 1. [Data](#data). 
 * 2. [ COLD, WARM, and WARM+ queries](#coldwarmandwarmqueries). 
@@ -431,11 +435,10 @@ Minimum Sum: 2132572901
 Maximum Sum: 7167771868
 ```
 
-Note that [stat_spectrums.py](script/stat_spectrums.py)  is provided in the script directory.
+Note that (script/stat_spectrums.py)[stat_spectrums.py] is provided in the script directory.
 
 
 We considere the best case scenario, offered by metaprofi in which the bloom filter size is 30 billions bits (kmindex uses only 25 billions).
 
 We thus computed for the average, median, min and max number of distinct kmers, the expected number of false positives, using the following formula: $1 - exp(-\frac{1}{(m / n)})$ where $m$ is the size of the BF (30 billions) and $n$ is the number of distinct kmers.
 
-```bash
