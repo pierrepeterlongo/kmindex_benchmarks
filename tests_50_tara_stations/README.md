@@ -71,22 +71,15 @@ WARM+ queries are computed twice each query.
 
 ###  3.1. <a name='kmindexcommands'></a> kmindex commands
 ####  3.1.1. <a name='kmindexindexing'></a> kmindex indexing
-See `data/fof.txt` file
+See [`fof.txt`](data/fof.txt) file.
 
 ```bash
-K=23
-M=2
-T=32
-P=128
-B=25000000000
-kmindex build -i index_50_tara -f fof.txt -d ./rundir -r index_all_50 -k ${K} --cpr --bloom-size ${B}  --threads ${T} --nb-partitions ${P}
+kmindex build -i index_50_tara -f fof.txt -d ./rundir -r index_all_50 -k 23 --cpr --bloom-size  25000000000 --threads 32 --nb-partitions 128
 ```
 
 ####  3.1.2. <a name='kmindexquerying'></a>kmindex querying
 ```bash
-Z=3
-T=32
-kmindex  query -i index_50_tara -z ${Z} --threads ${T} -o res -q query.fasta
+kmindex  query -i index_50_tara -z 5 --threads 32 -o res -q query.fasta
 ```
 
 ###  3.2. <a name='MetaGraphcommands'></a> MetaGraph commands
@@ -102,7 +95,7 @@ ls /path/to/read/files/*.fastq.gz > fof.txt
 **Create a canonical graph**
 
 ```bash
-cat fof.txt | metagraph build -p 32 -k 23 --min-count 2 -o index_tara_set_3_QQSS  --disk-swap index_metagraph/temp_disk --mode             canonical --mem-cap-gb 100
+cat fof.txt | metagraph build -p 32 -k 28 --min-count 2 -o index_tara_set_3_QQSS  --disk-swap index_metagraph/temp_disk --mode             canonical --mem-cap-gb 100
 ```
 * Wall clock time: 23h30
 * Max RAM: 459GB
@@ -121,7 +114,7 @@ metagraph transform -v --to-fasta --primary-kmers -o primary_contigs -p 32 index
 **Construct a new graph from the primary contigs and mark this graph as primary**
 
 ```bash
-metagraph build -v -p 32 -k 23 -o graph_primary --mode primary primary_contigs.fasta.gz
+metagraph build -v -p 32 -k 28 -o graph_primary --mode primary primary_contigs.fasta.gz
 ```
 * Wall clock time: NA
 * Max RAM: >900GB - job killed.
@@ -316,7 +309,7 @@ We gerated a random sequence composed of 10k nucleotides with an equal probabili
 We queried the $10000-28+1$ 28-mers of this sequence, and counted the number of positive answers. We abusively call this number the number of false positives. Notice that this is an over estimation of the number of false positives, as some of the 28-mers of the random sequence may be present in the reference dataset, with a tiny probability of $1/4^{28}$.
 
 ###  4.2. <a name='FPkmindex'></a>FP kmindex
-**Note**: the `data/test_FP` directory contains the random random sequence and results files of tested tools. 
+**Note**: the `data/test_FP` directory contains the [random sequence](data/test_FP/random_10k.fa) and results files ([FPkmindex.txt](data/test_FP/FPkmindex.txt) and [metaprofi_query_results-11_10_2023-10_34_28_t0](data/test_FP/metaprofi_query_results-11_10_2023-10_34_28_t0.txt)) of tested tools. 
 
 **Query** 
 ```bash
