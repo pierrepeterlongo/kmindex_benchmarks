@@ -1,7 +1,3 @@
-This readme file sums up the tested tool versions and the commands used.
-
-A special file [kmtricks_dynamicity.md](kmtricks_dynamicity.md) is dedicated to the tests performed comparing the various ways to dynamically update a kmindex index.
-
 <!-- vscode-markdown-toc -->
 * 1. [Data](#data). 
 * 2. [ COLD, WARM, and WARM+ queries](#coldwarmandwarmqueries). 
@@ -26,17 +22,21 @@ A special file [kmtricks_dynamicity.md](kmtricks_dynamicity.md) is dedicated to 
 	* 3.7. [ PebbleScout commands](#pebblescoutcommands). 
 		* 3.7.1. [ PebbleScout build](#pebblescoutbuild). 
 		* 3.7.2. [ PebbleScout expected query](#pebblescoutexpectedquery). 
+	* 3.8. [Themisto](#themisto). 
 * 4. [Computation of false positives](#computationoffalsepositives). 
 	* 4.1. [Protocol](#protocol). 
 	* 4.2. [FP kmindex](#fpkmindex). 
 	* 4.3. [FP MetaProfi command](#fpmetaproficommand). 
-	* 4.4. [Theoretical analyse](#theoreticalanalyse). 
 
 <!-- vscode-markdown-toc-config
 	numbering=true
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
+
+This readme file sums up the tested tool versions and the commands used.
+
+A special file kmtricks_dynamicity.md is dedicated to the tests performed comparing the various ways to dynamically update a kmindex index.
 
 
 
@@ -72,7 +72,7 @@ WARM+ queries are computed twice each query.
 ##  3. <a name='commandspertool'></a> Commands per tool
 
 ###  3.1. <a name='kmindexcommands'></a> kmindex commands
-
+* Version v0.5.2
 ####  3.1.1. <a name='kmindexindexing'></a> kmindex indexing
 
 See [`fof.txt`](data/fof.txt) file.
@@ -88,8 +88,8 @@ kmindex  query -i index_50_tara -z 5 --threads 32 -o res -q query.fasta
 ```
 
 ###  3.2. <a name='metagraphcommands'></a> MetaGraph commands
-
-MetaGraph was used as indicated in this document
+* version v0.3.6
+* MetaGraph was used as indicated in this document
 https://metagraph.ethz.ch/static/docs/quick_start.html, sections "[Construct canonical graph](https://metagraph.ethz.ch/static/docs/quick_start.html#construct-canonical-graph)" and "[Construct primary graph](https://metagraph.ethz.ch/static/docs/quick_start.html#construct-primary-graph)".
 
 ####  3.2.1. <a name='metagraphindexing'></a> MetaGraph indexing
@@ -156,7 +156,7 @@ python create_fof_from_file_names.py -i fof.txt > fof_annotated.txt
 
 ###  3.3. <a name='paccommands'></a>PAC commands
 
-Following discussions with the PAC authors, we tested two versions, the one indicated in the original paper, and the version 20b8094f5074e93e792fbf26a5572119c058c23b. 
+* Following discussions with the PAC authors, we tested two versions, the one indicated in the original paper, and the version 20b8094f5074e93e792fbf26a5572119c058c23b. 
 
 Here are commands and results obtained with this latest version: 
 
@@ -296,7 +296,7 @@ ls -dD data_per_station/* > fof.lst
 Results are erroneous. This is expected as Needle is based on subsamples of minimizers, and developped for transcripts expressions.
 
 ###  3.7. <a name='pebblescoutcommands'></a> PebbleScout commands
-
+* version v2.25
 ####  3.7.1. <a name='pebblescoutbuild'></a> PebbleScout build
 
 ```bash
@@ -327,6 +327,15 @@ zcat head_11SUR1QQSS11.fastq.gz | head -n 2 | tr "@" ">"  > query.fa
 #make the search
 /usr/bin/time ./pebblescout_v2.25/software/pebblescout/pebblesearch -f query.fa -m 2  -F "QueryID,SubjectID,%coverage,PBSscore,BioSample,Sample,Host" -i  db.json -o score.out 2> score.log
 ```
+
+###  3.8. <a name='themisto'></a>Themisto
+* Version linux_v3.2.0
+```bash
+./themisto_linux_v3.2.0/themisto  build -k 28 -i fof.txt --index-prefix tara50 --temp-dir temp --mem-gigas 800 --n-threads 32 --file-colors 
+```
+
+Was killed after 9h14, reaching the machine limit of 900GB of RAM, and using 4.7TB of disk space.
+
 
 ##  4. <a name='computationoffalsepositives'></a>Computation of false positives
 
@@ -423,22 +432,3 @@ Result:
 | sum | size | avg | median | min | max | nb_nul |
 | --- | --- | --- | --- | --- | --- | --- |
 | 558.9 | 50 | 11.178 | 10.445 | 6.93 | 21.55 | 0 |
-
-###  4.4. <a name='theoreticalanalyse'></a>Theoretical analyse
-We provide the theoretical expected false positive rates. This is computed by counting the number of distinct kmers indexed in each of the 50 read sets:
-
-```bash
-> python stat_spectrums.py
-Average Sum: 3708576010
-Median Sum: 3419461766
-Minimum Sum: 2132572901
-Maximum Sum: 7167771868
-```
-
-Note that (script/stat_spectrums.py)[stat_spectrums.py] is provided in the script directory.
-
-
-We considere the best case scenario, offered by metaprofi in which the bloom filter size is 30 billions bits (kmindex uses only 25 billions).
-
-We thus computed for the average, median, min and max number of distinct kmers, the expected number of false positives, using the following formula: $1 - exp(-\frac{1}{(m / n)})$ where $m$ is the size of the BF (30 billions) and $n$ is the number of distinct kmers.
-
