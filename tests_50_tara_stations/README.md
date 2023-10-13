@@ -1,3 +1,8 @@
+
+This readme file sums up the tested tool versions and the commands used.
+
+A special file kmtricks_dynamicity.md is dedicated to the tests performed comparing the various ways to dynamically update a kmindex index.
+
 <!-- vscode-markdown-toc -->
 * 1. [Data](#data). 
 * 2. [ COLD, WARM, and WARM+ queries](#coldwarmandwarmqueries). 
@@ -33,10 +38,6 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-
-This readme file sums up the tested tool versions and the commands used.
-
-A special file kmtricks_dynamicity.md is dedicated to the tests performed comparing the various ways to dynamically update a kmindex index.
 
 
 
