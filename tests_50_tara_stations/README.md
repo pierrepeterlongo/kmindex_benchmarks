@@ -28,11 +28,12 @@ A special file kmtricks_dynamicity.md is dedicated to the tests performed compar
 		* 3.7.1. [ PebbleScout build](#pebblescoutbuild). 
 		* 3.7.2. [ PebbleScout expected query](#pebblescoutexpectedquery). 
 	* 3.8. [Themisto](#themisto). 
+	* 3.9. [HFBI](#hfbi). 
 * 4. [Computation of false positives](#computationoffalsepositives). 
 	* 4.1. [Protocol](#protocol). 
 	* 4.2. [FP kmindex](#fpkmindex). 
 	* 4.3. [FP MetaProfi command](#fpmetaproficommand). 
-  * 4.4. [Theoretical Analyse](#theoreticalanalyse).
+	* 4.4. [Theoretical analyse](#theoreticalanalyse). 
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -339,6 +340,18 @@ zcat head_11SUR1QQSS11.fastq.gz | head -n 2 | tr "@" ">"  > query.fa
 Was killed after 9h14, reaching the machine limit of 900GB of RAM, and using 4.7TB of disk space.
 
 
+###  3.9. <a name='hfbi'></a>HFBI
+* Versions:
+	* Raptor version: 3.0.0 (commit unavailable)
+  * Sharg version: 1.0.1-rc.1
+  * SeqAn version: 3.3.0-rc.1
+
+```bash
+raptor prepare --input fof.txt --output out_raptor --threads 32 --kmer 28 --kmer-count-cutoff 2
+
+16:53.10 real,  6724.50 user,   253.93 sys,     0 amem, 943714776 mmem
+```
+Ran ou of RAM after ~17h, with 900GB of RAM used.
 ##  4. <a name='computationoffalsepositives'></a>Computation of false positives
 
 The false positive rates were computed on the only tools for which we could compute perform queries: MetaProfi, and kmindex. We remind that PAC provided an empty output file, and that other tools either did not finish the indexing, or did not finish a single query.
