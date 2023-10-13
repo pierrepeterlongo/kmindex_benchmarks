@@ -452,4 +452,13 @@ Note that [stat_spectrums.py](script/stat_spectrums.py)  is provided in the scri
 
 We considere the best case scenario, offered by metaprofi in which the bloom filter size is 30 billions bits (kmindex uses only 25 billions).
 
-We thus computed for the average, median, min and max number of distinct kmers, the expected number of false positives, using the following formula: $1 - exp(-\frac{1}{(m / n)})$ where $m$ is the size of the BF (30 billions) and $n$ is the number of distinct kmers.
+We thus computed for the average, median, min and max number of distinct kmers, the expected number of false positives, using the following formula: $1 - exp(-\frac{n}{m})$ where $m$ is the size of the BF (30 billions) and $n$ is the number of distinct kmers.
+
+
+Theoretical results: 
+
+
+Result:
+| size | avg | median | min | max | nb_nul |
+| --- | --- | --- | --- | --- | --- |
+| 50 | 11.63 | 10.77 | 6.86 | 21.25 | 0 |
