@@ -32,6 +32,7 @@ A special file kmtricks_dynamicity.md is dedicated to the tests performed compar
 	* 4.1. [Protocol](#protocol). 
 	* 4.2. [FP kmindex](#fpkmindex). 
 	* 4.3. [FP MetaProfi command](#fpmetaproficommand). 
+  * 4.4. [Theoretical Analyse](#theoreticalanalyse).
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -433,3 +434,22 @@ Result:
 | sum | size | avg | median | min | max | nb_nul |
 | --- | --- | --- | --- | --- | --- | --- |
 | 558.9 | 50 | 11.178 | 10.445 | 6.93 | 21.55 | 0 |
+
+
+###  4.4. <a name='theoreticalanalyse'></a>Theoretical analyse
+We provide the theoretical expected false positive rates. This is computed by counting the number of distinct kmers indexed in each of the 50 read sets:
+
+```bash
+> python stat_spectrums.py
+Average Sum: 3708576010
+Median Sum: 3419461766
+Minimum Sum: 2132572901
+Maximum Sum: 7167771868
+```
+
+Note that [stat_spectrums.py](script/stat_spectrums.py)  is provided in the script directory.
+
+
+We considere the best case scenario, offered by metaprofi in which the bloom filter size is 30 billions bits (kmindex uses only 25 billions).
+
+We thus computed for the average, median, min and max number of distinct kmers, the expected number of false positives, using the following formula: $1 - exp(-\frac{1}{(m / n)})$ where $m$ is the size of the BF (30 billions) and $n$ is the number of distinct kmers.
