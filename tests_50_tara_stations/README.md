@@ -28,7 +28,7 @@ A special file kmtricks_dynamicity.md is dedicated to the tests performed compar
 		* 3.7.1. [ PebbleScout build](#pebblescoutbuild). 
 		* 3.7.2. [ PebbleScout expected query](#pebblescoutexpectedquery). 
 	* 3.8. [Themisto](#themisto). 
-	* 3.9. [HFBI](#hfbi). 
+	* 3.9. [HIBF](#hfbi). 
 * 4. [Computation of false positives](#computationoffalsepositives). 
 	* 4.1. [Protocol](#protocol). 
 	* 4.2. [FP kmindex](#fpkmindex). 
@@ -347,7 +347,7 @@ zcat head_11SUR1QQSS11.fastq.gz | head -n 2 | tr "@" ">"  > query.fa
 Was killed after 9h14, reaching the machine limit of 900GB of RAM, and using 4.7TB of disk space.
 
 
-###  3.9. <a name='hfbi'></a>HFBI
+###  3.9. <a name='hfbi'></a>HIBF
 * Versions:
 	* Raptor version: 3.0.0 (commit unavailable)
   * Sharg version: 1.0.1-rc.1
