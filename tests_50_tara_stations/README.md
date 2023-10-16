@@ -302,7 +302,6 @@ These statistics were validated by querying random sequences of size 100, with s
 We queried 100,000 reads from the first indexed file. Among these queries, 19,274 answers were negative for this file. This is a false negative rate of 19.27%.
 
 
-```bash
 
 ###  3.7. <a name='pebblescoutcommands'></a> PebbleScout commands
 * version v2.25
