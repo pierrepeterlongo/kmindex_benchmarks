@@ -287,16 +287,22 @@ ggcat query --colors -k 28 -j 32 --memory 800 --output-file-prefix res output.fa
 ```bash
 ls -dD data_per_station/* > fof.lst
 ./needle minimiser fof.lst -k 25 -t 32 --cutoff 2  
-./needle ibfmin *.minimiser -t 32 -f 0.25 -e 2 -e 255 -o needle_index
+./needle ibfmin *.minimiser -t 32 -f 0.25 -e 2 -e 4 -e 8 -e 16 -e 32 -e 64 -e 128 -e 255 -o needle_index
 ```
 
 ####  3.6.2. <a name='needlequery'></a>Needle query
+##### Needle FP analyses
+False positive rates are reported by needle during the build step in file [needle_indexIBF_FPRs.fprs](needle_indexIBF_FPRs.fprs). 
+In average it is 24.2% (as expaected below 25%). However it can be as high as 64.88%.
+
+These statistics were validated by querying random sequences of size 100, with similar results.
+
+##### Needle FN analyses
+
+We queried 100,000 reads from the first indexed file. Among these queries, 19,274 answers were negative for this file. This is a false negative rate of 19.27%.
+
 
 ```bash
-./needle estimate query.fasta -i needle_index
-```
-
-Results are erroneous. This is expected as Needle is based on subsamples of minimizers, and developped for transcripts expressions.
 
 ###  3.7. <a name='pebblescoutcommands'></a> PebbleScout commands
 * version v2.25
@@ -317,7 +323,9 @@ ln -s full_list.txt list.txt
 #edit the the json files: adjust paths in db.json and db.with_suppressed.json to the directory where you built the database and check that file sizes for *.tr.bin and .vocab are correct in the corresponding json files  under tranTablesSZ and vocabSZ, respectively. Entry for vocabFLDS should reflect metadata fields in the list.txt file.
 ```
 
-**Note:** killed after 24 hours of computation time, with 32 threads and 350GB of RAM.
+**Note:** killed after 24 hours of computation time, with 32 threads and 350GB of RAM. First set was "harvesed" in approximately 21 hours.
+
+Estimated ETA is 21hx50 = 1050h = 43 days.
 
 ####  3.7.2. <a name='pebblescoutexpectedquery'></a> PebbleScout expected query
 
