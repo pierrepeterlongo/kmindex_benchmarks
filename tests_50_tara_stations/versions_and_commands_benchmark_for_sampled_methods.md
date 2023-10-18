@@ -3,12 +3,12 @@ Despite this is not the main goal of the kmindex manuscript, for curiosity purpo
 Needle was able to build an index. However query results suffer from a high false positive rate (24.2% on average, and up to 64.88% for some queries), and from a high false negative rate (19.27% on average).
 
 <!-- vscode-markdown-toc -->
-	* [ Needle commands](#Needlecommands)
-		* [ Needle indexing](#Needleindexing)
-		* [ Needle query](#Needlequery)
-	* [ PebbleScout commands](#PebbleScoutcommands)
-		* [ PebbleScout build](#PebbleScoutbuild)
-		* [ PebbleScout expected query](#PebbleScoutexpectedquery)
+* [ Needle commands](#Needlecommands)
+	* [ Needle indexing](#Needleindexing)
+	* [ Needle query](#Needlequery)
+* [ PebbleScout commands](#PebbleScoutcommands)
+	* [ PebbleScout build](#PebbleScoutbuild)
+	* [ PebbleScout expected query](#PebbleScoutexpectedquery)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
