@@ -6,10 +6,10 @@ The false positive rates were computed on the only tools for which we could comp
 
 
 <!-- vscode-markdown-toc -->
-* [Protocol](#protocol). 
-* [Theoretical analyse](#theoreticalanalyse). . 
-* [Results kmindex](#resultskmindex). 
-* [Results MetaProfi](#resultsmetaprofi). 
+* [Protocol](#protocol)
+* [Theoretical analyse](#theoreticalanalyse)
+* [Results kmindex](#resultskmindex)
+* [Results MetaProfi](#resultsmetaprofi)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
