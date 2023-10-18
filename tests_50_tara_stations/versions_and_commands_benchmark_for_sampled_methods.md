@@ -1,6 +1,6 @@
-Despite this is not the main goal of the kmindex manuscript, for curiosity purpose, we provide here the versions and commands used to run the benchmark for the sampled methods, based on the use of sketches for indexing data. 
+Despite this is not the primary goal of the kmindex manuscript, for curiosity purposes, we provide here the versions and commands used to run the benchmark for the sampled methods, based on the use of sketches for indexing data. 
 
-Needle was able to build an index. However query results suffer from a high false positive rate (24.2% on average, and up to 64.88% for some queries), and from a high false negative rate (19.27% on average).
+Needle was able to build an index. However, query results suffer from a high false positive rate (24.2% on average, and up to 64.88% for some queries), and from a high false negative rate (19.27% on average).
 
 <!-- vscode-markdown-toc -->
 * [ Needle commands](#Needlecommands)
@@ -37,7 +37,7 @@ ls -dD data_per_station/* > fof.lst
 #### <a name='Needlequery'></a> Needle query
 ##### Needle FP analyses
 False positive rates are reported by needle during the build step in file [needle_indexIBF_FPRs.fprs](needle_indexIBF_FPRs.fprs). 
-In average it is 24.2% (as expaected below 25%). However it can be as high as 64.88%.
+On average it is 24.2% (as expected below 25%). However, it can be as high as 64.88%.
 
 These statistics were validated by querying random sequences of size 100, with similar results.
 
