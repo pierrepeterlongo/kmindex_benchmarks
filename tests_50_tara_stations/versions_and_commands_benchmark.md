@@ -180,7 +180,7 @@ pac -l Tara_PAC -q query.fa -c 32
   * MetaProFi version: v0.6.0
   * K-Mer Counter (KMC) ver. 3.2.2
 
-#### <a name='MetaProfiIndexing'></a> MetaProfi Indexing
+#### <a name='metaprofiindexing'></a> MetaProfi Indexing
 
 We need filtered kmers, so we count kmers using kmc.
 
@@ -219,7 +219,7 @@ h: 1
 k: 28
 m: 30000000000
 nproc: 32
-max_memory: 500GiB
+max_memory: 800GiB
 sequence_type: nucleotide
 output_directory: index_metaprofi_dir
 matrix_store_name: metaprofi_bfmatrix
@@ -293,5 +293,22 @@ Ran out of RAM after ~17h, with 900GB of RAM used.
 ``` 
 Ran out of RAM after ~13h, with 900GB of RAM used.
 
+### COBS
+* Version: git commit 1cd6df2 on Nov 24, 2021
+
+#### COBS indexing
+
+COBS does not filters out kmers. Thus we need to filter them before indexing. We apply the same filtering as for MetaProfi (see [ MetaProfi Indexing](#metaprofiindexing) section).
+
+```bash
+cobs compact-construct -k 28 /WORKS/expes_indexations/data_50_tara/counted_kmers/ cobs_50tara_from_kmers.cobs_compact
+```
+
+
+#### COBS query
+
+```bash
+cobs query -i cobs_50tara_from_kmers.cobs_compact -f query.fasta -t 0.01 
+```
 
 

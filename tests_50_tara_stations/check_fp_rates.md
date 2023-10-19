@@ -11,6 +11,7 @@ The false positive rates were computed on the only tools for which we could comp
 * [Results kmindex](#resultskmindex)
 * [Results MetaProfi](#resultsmetaprofi)
 
+
 <!-- vscode-markdown-toc-config
 	numbering=false
 	autoSave=true
@@ -24,7 +25,7 @@ We gerated a random sequence composed of 10k nucleotides with an equal probabili
 We queried the $10000-28+1$ 28-mers of this sequence, and counted the number of positive answers. We abusively call this number the number of false positives. Notice that this is an over estimation of the number of false positives, as some of the 28-mers of the random sequence may be present in the reference dataset, with a tiny probability of $1/4^{28}$.
 
 
-**Note**: the `data/test_FP` directory contains the [random sequence](data/test_FP/random_10k.fa) and results files ([FPkmindex.txt](data/test_FP/FPkmindex.txt) and [metaprofi_query_results-11_10_2023-10_34_28_t0](data/test_FP/metaprofi_query_results-11_10_2023-10_34_28_t0.txt)) of tested tools.
+**Note**: the `data/test_FP` directory contains the [random sequence](data/test_FP/random_10k.fa) and results files ([FPkmindex.txt](data/test_FP/FPkmindex.txt), [metaprofi_query_results-11_10_2023-10_34_28_t0](data/test_FP/metaprofi_query_results-11_10_2023-10_34_28_t0.txt), and [res_cobs_random.txt](data/test_FP/res_cobs_random.txt)  of tested tools.
 
 ## <a name='theoreticalanalyse'></a>Theoretical analyse
 We provide the theoretical expected false positive rates. This is computed by counting the number of distinct kmers indexed in each of the 50 read sets:
@@ -140,4 +141,52 @@ Result:
 | sum | size | avg | median | min | max | nb_nul |
 | --- | --- | --- | --- | --- | --- | --- |
 | 558.9 | 50 | 11.178 | 10.445 | 6.93 | 21.55 | 0 |
+
+
+
+
+## Results COBS
+
+
+```bash
+cobs query -i cobs_50tara_from_kmers.cobs_compact -f random_10k.fa -t 0.01 > res_cobs_random.txt 
+```
+
+**Analyses**
+Each line of the output file contains the target sample name (eg `23SUR1QQSS11_kmers`) and the number of shared kmers between the query and this sample (eg 2928).
+Each shared kmer is considered as a false positive. 
+As the query contains 10000 - 28 + 1 = 9973, the FP rate is computed as the number of shared kmers divided by 9973.
+
+```bash
+grep -v "random" res_cobs_random.txt | cut -f 2 | awk '
+  BEGIN {
+    c = 0;
+    sum = 0;
+    nb_nul = 0
+  }
+  {
+    a[c++] = $1 * 100 / 9973;
+    sum += $1 * 100 / 9973;
+        if( $1 == 0 ) {
+            nb_nul = nb_nul + 1;
+        }
+  }
+  END {
+    ave = sum / c;
+    if( (c % 2) == 1 ) {
+      median = a[ int(c/2) ];
+    } else {
+      median = ( a[c/2] + a[c/2-1] ) / 2;
+    }
+    OFS="\t";
+    print sum, c, ave, median, a[0], a[c-1], nb_nul;
+  }
+'
+```
+
+Result:
+| sum | size | avg | median | min | max | nb_nul |
+| --- | --- | --- | --- | --- | --- | --- |
+| 810.027 | 50 |     16.2005 | 15.0306 | 29.3593 | 10.4482 | 0 |
+
 
