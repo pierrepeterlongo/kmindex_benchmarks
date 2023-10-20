@@ -301,14 +301,14 @@ Ran out of RAM after ~13h, with 900GB of RAM used.
 COBS does not filters out kmers. Thus we need to filter them before indexing. We apply the same filtering as for MetaProfi (see [ MetaProfi Indexing](#metaprofiindexing) section).
 
 ```bash
-cobs compact-construct -k 28 /WORKS/expes_indexations/data_50_tara/counted_kmers/ cobs_50tara_from_kmers.cobs_compact
+cobs compact-construct -k 28 -T 32 -f 0.25 /WORKS/expes_indexations/data_50_tara/counted_kmers/ cobs_50tara_from_kmers.cobs_compact
 ```
 
 
 #### COBS query
 
 ```bash
-cobs query -i cobs_50tara_from_kmers.cobs_compact -f query.fasta -t 0.01 
+cobs query -i cobs_50tara_from_kmers.cobs_compact -f query.fasta -t 0.01 -T 32
 ```
 
 
