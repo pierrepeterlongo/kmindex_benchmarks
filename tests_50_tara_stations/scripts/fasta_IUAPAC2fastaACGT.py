@@ -38,7 +38,6 @@ def main():
     output_filename = sys.argv[2]
 
     process_fasta(input_filename, output_filename)
-    print(f"Fichier {input_filename} traité et enregistré en tant que {output_filename}.")
 
 if __name__ == "__main__":
     main()
