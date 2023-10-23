@@ -311,4 +311,8 @@ cobs compact-construct -k 28 -T 32 -f 0.25 /WORKS/expes_indexations/data_50_tara
 cobs query -i cobs_50tara_from_kmers.cobs_compact -f query.fasta -t 0.01 -T 32
 ```
 
+Note that cobs query must contain only A,C,G,T characters, and no other IUPAC characters. Thus we need to transform out the query sequences before querying. We replaced any non-ACGT character by a random characer in {A,C,G,T}. We used the script [fasta_IUAPAC2fastaACGT.py](scripts/fasta_IUAPAC2fastaACGT.py)
+
+```bash
+
 
