@@ -1,4 +1,4 @@
-This note describes the computation of false negatives rates of the tested tools which were able to build an index and perform queries on the 50 TARA stations dataset: kmindex and MetaProfi.
+This note describes the computation of false positive rates of the tested tools which were able to build an index and perform queries on the 50 TARA stations dataset: kmindex and MetaProfi.
 
 
 The false positive rates were computed on the only tools for which we could compute perform queries: MetaProfi, and kmindex. We remind that PAC provided an empty output file, and that other tools either did not finish the indexing, or did not finish a single query.
